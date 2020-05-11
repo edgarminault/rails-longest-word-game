@@ -3,7 +3,7 @@ require 'open-uri'
 
 class PagesController < ApplicationController
   def new
-    start_time
+    @start = Time.new.to_i
     @array = generate_random_letters
   end
 
@@ -14,7 +14,7 @@ class PagesController < ApplicationController
     @answer = params[:word]
     @url = "https://wagon-dictionary.herokuapp.com/#{@answer}"
     answer_treatment
-    @end = Time.new
+    @end = Time.new.to_i
     score
   end
 
@@ -59,13 +59,11 @@ class PagesController < ApplicationController
       end
     end
   end
-  def start_time
-    @start = Time.new
-  end
+
   def score
     @score = 0
     if @message == "Word exists!"
-      duration = (@end - @start).to_i
+      duration = (@end - @start)
       @score = @file["length"] * 10 + (60-duration) * 10
     end
   end
