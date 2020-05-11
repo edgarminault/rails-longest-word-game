@@ -78,3 +78,22 @@
   box-shadow: 0 0 15px rgba(0,0,0,0.2);
   background-color: #a0d2ff;
 }
+
+a{
+  text-decoration: none;
+}
+
+.btn-gradient {
+  color: white;
+  padding: 8px 24px;
+  border-radius: 4px;
+  font-weight: bold;
+  background: linear-gradient(#167FFB, #0F60C4);
+  transition: background 0.3s ease;
+  border: 1px solid #0F60C4;
+}
+
+.btn-gradient:hover {
+  background: linear-gradient(#147EFF, #0F67DA);
+  color: white;
+}

@@ -31,24 +31,29 @@ class PagesController < ApplicationController
 
   def answer_treatment
     online_answer = open(@url).read
-    file = JSON.parse(online_answer)
-    if file[:found]
+    @file = JSON.parse(online_answer)
+    if @file["found"]
       hash_values_update
     else
-      @message = "Word does not exist"
+      @message = "Does not exist."
     end
-    hash_values_update
+    @message
   end
 
   def hash_values_update
     @answer.split("").each do |letter|
       if @hash.keys.include?(letter.to_sym)
-        @hash[letter.to_sym] =- 1
+        @hash[letter.to_sym] -= 1
       else
-        @hash[letter.to_sym] = -1
+        @hash[letter.to_sym] = -10
       end
     end
     @message = "Word exists!"
-    @hash.values.each {|value| @message = "Word does not respect letter count!" if value < 0}
+    @hash.values.each do |value|
+      if value < 0
+        @message = "Letter count is wrong."
+      end
+    end
   end
 end
+
